@@ -95,3 +95,5 @@ class OrderingsController < ApplicationController
     redirect_to checkout_orderings_path
   end
 end
+
+#amend thing
