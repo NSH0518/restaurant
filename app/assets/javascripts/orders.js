@@ -12,7 +12,7 @@
 //             let output = "";
 //             let grand_total = 0
 //             for(let i=0; i < order_items.length; i++) {
-//              let sub_total = quantity * unit price
+//              let sub_total = quantity * order_items.unit price
 //               grand_total += sum of sub total
 //                 output += `<tr>
 //                              <td>${order_items[i].menu_item.name}</td>
