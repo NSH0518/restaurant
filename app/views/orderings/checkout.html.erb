@@ -1,0 +1,52 @@
+<div class="container-fluid">
+<h2>Checkout Page</h2>
+
+<table style = "width: 100%; border:2px solid">
+    <tr>
+        <th>Order ID</th>
+        <th>Order Date</th>
+    </tr>
+    
+    <tr>
+        <td style="text=align center"><%= @order.id %></td>
+        <td style="text=align center"><%= @order.ordering_date %></td>
+    </tr>
+</table>
+
+<h3>Ordered Items</h3>
+<%= form_tag update_order_items_orderings_path do %>
+<%#= form_tag checkout_orderings_path do %>
+<table style = "width: 100%; border:2px solid">
+    <tr>
+        <th>Menu Item Name</th>
+        <th>Price per Unit</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+
+      <% sum_total = 0.0 %>
+        <% @order.order_items.each do |order_item| %>
+          <% sub_total = order_item.menu_item.unit_price * order_item.quantity %>
+          <% sum_total += sub_total %>
+            <tr>
+              <td style="text=align center"><%= order_item.menu_item.name %></td>
+              <td style="text=align center"><%= order_item.menu_item.unit_price %></td>
+              <td style="text=align center"><%= text_field_tag "order_item[#{order_item.id}][quantity]", order_item.quantity %></td>
+              <td style="text=align center">RM <%= sub_total %></td>
+            </tr>
+        <% end %>    
+            <tr>
+              <td colspan = "3"></td>
+              <td>Total: RM <%= sum_total %></td>
+            </tr>
+         
+</table>
+
+<div class="row">
+  <div class="col-sm-12">
+      <%= submit_tag "Update Order" %>
+      <%= link_to "Pay", new_payment_path %>
+  </div>
+</div>
+<% end %>
+</div>

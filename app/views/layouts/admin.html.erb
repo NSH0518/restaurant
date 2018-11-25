@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>Restaurant2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  </head>
+
+  <body style="background-color: #EEE6F9">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <span class="navbar-text">
+            <% if session[:admin_id].present? %>
+              <h5 class="navbar-brand">Hi, <%= Admin.find(session[:admin_id]).name %></h5>
+            <% end %> 
+          </span>
+        </div>
+      
+          <ul class="nav navbar-nav">
+            <% if flash[:alert].present? %>
+              <li class="alert_message">
+                <%= flash[:alert] %>
+              </li>
+            <% end %>
+    
+            <% if flash[:notice].present? %>
+              <li class="alert_notice">
+                <%= flash[:notice] %>
+              </li>
+            <% end %>
+          </ul>
+          
+      
+          <ul class="nav navbar-nav navbar-right">
+            <% if session[:admin_id].present? %>
+            <li>
+              <%= link_to "logout", "/admin/logout", data: { method: :delete } %>
+            </li>
+            <% end %>
+          </ul>
+      </div>
+    </nav>
+    
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-2"><%= link_to "Category", categories_path %></div>
+      <div class="col-sm-2"><%= link_to "Menu Item", menu_items_path %></div>
+      <div class="col-sm-2"><%= link_to "Order", orders_path %></div>
+      <div class="col-sm-2"><%= link_to "Customer", customers_path %></div>
+      <div class="col-sm-2"><%= link_to "Admin", admins_path %></div>
+      <div class="col-sm-1"></div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-2"></div>
+      
+      <div class="col-sm-2"></div>
+    </div>
+
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<div class="sign_up_page">
+<h1 class="centertext">Sign Up</h1>
+<%= form_with(url: sign_up_path, model: @customer, local: true) do |form| %>
+  <% if @customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+      <ul>
+      <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field centertext">
+    <%= form.label :name %>
+    <br>
+    <%= form.text_field :name, placeholder: "Jayden" %>
+  </div>
+
+  <div class="field centertext">
+    <%= form.label :address %>
+    <br>
+    <%= form.text_area :address, class: "text_area", placeholder: "Please enter your address according to your Identity Card" %>
+  </div>
+
+  <div class="field centertext">
+    <%= form.label :email %>
+    <br>
+    <%= form.text_field :email, placeholder: "example@gmail.com" %>
+  </div>
+
+  <div class="field centertext">
+    <%= form.label :contact_number %>
+    <br>
+    <%= form.text_field :contact_number, placeholder: "01X - XXX XXXX" %>
+  </div>
+  
+  <div class="field centertext">
+    <%= form.label :password %>
+    <br>
+    <%= form.text_field :password %>
+  </div>
+
+  <div class="actions centertext">
+    <%= form.submit %>
+  </div>
+  
+  <p class="centertext">Already have an account? Go to <%= link_to "Login", "/login" %>.</p>
+<% end %>
+</div>

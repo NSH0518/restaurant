@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+<h1>Menu Items</h1>
+
+<table class="table table-dark table-hover">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Unit price</th>
+      <th>Category</th>
+      <th>Position</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id="menu_items">
+    <% @menu_items.each do |menu_item| %>
+      <tr>
+        <td><%= image_tag(menu_item.photo) if menu_item.photo.attached? %></td>
+        <td><%= menu_item.name %></td>
+        <td><%= menu_item.unit_price %></td>
+        <td><%= menu_item.category.name %></td>
+        <td><%= menu_item.position %></td>
+        <td><%= link_to 'Show', menu_item %></td>
+        <td><%= link_to 'Edit', edit_menu_item_path(menu_item) %></td>
+        <td><%= link_to 'Destroy', menu_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<p class="centertext"><%= link_to 'New Menu Item', new_menu_item_path %></p>

@@ -1,0 +1,42 @@
+<div class="container-fluid">
+<h1>Payment</h1>
+
+<%= form_tag payments_path do %>
+  <table class="table table-hover">
+      <tr>
+          <th>Total Amount</th>
+          <td style="text-align: center"><%= @order.total_amount %></td>
+      </tr>
+      
+      <tr>
+          <th>Type of Card</th>
+          <td style="text-align: center"><%= text_field_tag "Type of Card" %></td>
+      </tr>
+      
+      <tr>
+          <th>Card No.</th>
+          <td style="text-align: center"><%= text_field_tag "Card No." %></td>
+      </tr>
+      
+      <tr>
+          <th>Name on Card</th>
+          <td style="text-align: center"><%= text_field_tag "Name on Card" %></td>
+      </tr>
+      
+      <tr>
+          <th>Exp date</th>
+          <td style="text-align: center"><%= text_field_tag "Exp date" %></td>
+      </tr>
+          
+      <tr>
+          <th>CSV</th>
+          <td style="text-align: center"><%= text_field_tag "CSV" %></td>
+      </tr>
+      
+      <tr>
+        <td colspan="6"></td>
+        <td><%= submit_tag "Pay" %></td>
+      </tr>
+  </table>
+<% end %>  
+</div>

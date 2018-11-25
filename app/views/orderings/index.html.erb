@@ -1,0 +1,89 @@
+<div class="container-fluid", data-turbolinks="false">
+    <div class="row">
+        <div class="col-sm-2">
+            <table>
+                <tr>
+                    <th>Category</th>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <%= link_to "All", orderings_path%>
+                        <%#= link_to "All", "#", class: "addCategotyId", data: { category_id: 0} %>
+                    </td>
+                </tr>
+                
+                
+                <% @categories.each do |category| %>
+                <tr>
+                    <td><%= link_to category.name, "/orderings?category_id=#{category.id}" %></td>
+                    <!--<td><%#= link_to category.name, "#", class: "addCategotyId", data: { category_id: category_id} %></td>-->
+                </tr>
+                <% end %>
+            </table>   
+        </div>
+        
+        
+        <div class="col-sm-6">
+            <h2>Menu Item</h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+                
+                
+                <% @menu_items.each do |item| %>
+                  <%= form_tag "/orderings/order" do %>
+                    <%= hidden_field_tag "menu_item_id", item.id %>
+                      <tr>
+                          <td><%= item.name %></td>
+                          <td><%= item.unit_price %></td>
+                          <td><%= number_field_tag "quantity", class: 'widthqty' %></td>
+                          <td><%= submit_tag "Add to Cart" %></td>
+                      </tr>
+                  <% end %>
+                <% end %>
+            </table>
+        </div>
+        
+        
+        <div class="col-sm-4">
+            <h2>Your Cart</h2>
+            <table>
+                <tr>
+                    <th> </th>
+                    <th>Quantity</th>
+                    <th> </th>
+                    <th>Name</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+                
+                <% if @order.present? %>
+                  <% sum_total = 0.00 %>
+                    <% @order.order_items.each do |order_item| %>
+                      <% sub_total = order_item.menu_item.unit_price * order_item.quantity %>
+                        <% sum_total += sub_total %>
+                          <tr>
+                              <td><%= link_to "-", downturn_quantity_ordering_path(order_item), data: {method: :delete} %></td>
+                              <td><%= order_item.quantity %></td>
+                              <td><%= link_to "+", upturn_quantity_ordering_path(order_item), data: {method: :patch} %></td>
+                              <td><%= order_item.menu_item.name %></td>
+                              <td><%= order_item.menu_item.unit_price %></td>
+                              <td><%= order_item.menu_item.unit_price * order_item.quantity %></td>
+                          </tr>
+                    <% end %>
+                <% end %>
+                
+                <tr>
+                    <td colspan = "4"> Total: RM <%= sum_total %></td>
+                </tr>    
+            </table>
+            
+            <%= link_to '<button type="button">Proceed to Checkout</button>'.html_safe, checkout_orderings_path %>
+        </div>
+    </div>
+</div>

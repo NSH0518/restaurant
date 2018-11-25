@@ -1,0 +1,26 @@
+<div class="login_page">
+<h1 class="centertext">Admin Login</h1>
+
+<br><br>
+
+<%= form_tag "/admin/login" do %>
+  
+  <p class="centertext">
+  <label>Email</label>
+  <br>
+  <%= text_field_tag "email" %>
+  </p>  
+  
+  <br>
+  
+  <p class="centertext">
+  <label>Password</label>
+  <br>
+  <%= password_field_tag "password" %>
+  </p>
+  
+  <br>
+  
+  <p class="centertext"><%= submit_tag "Login" %></p>
+<% end %>
+</div>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @menu_item.name %>
+</p>
+
+<p>
+  <strong>Unit price:</strong>
+  <%= @menu_item.unit_price %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @menu_item.category.name %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @menu_item.position %>
+</p>
+
+<p>
+  <strong>Image:</strong><br>
+  <%= image_tag @menu_item.photo.variant(resize: "100x100") if@menu_item.photo.attached? %>
+</p>
+
+<%= link_to 'Edit', edit_menu_item_path(@menu_item) %>
+<%= link_to 'Back', menu_items_path %>
